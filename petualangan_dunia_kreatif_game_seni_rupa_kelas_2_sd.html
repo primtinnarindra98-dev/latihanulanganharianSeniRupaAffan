@@ -1,0 +1,2201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petualangan Dunia Kreatif - Seni Rupa Kelas 2 SD</title>
+    <!-- Menggunakan Google Fonts Fredoka & Nunito untuk tampilan bulat, besar, dan ramah anak -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-yellow: #FFD166;
+            --primary-pink: #EF476F;
+            --primary-blue: #118AB2;
+            --primary-green: #06D6A0;
+            --primary-purple: #8338EC;
+            --primary-orange: #FF9F1C;
+            --bg-cream: #FFFDF7;
+            --text-dark: #2B2D42;
+            --card-shadow: 0 10px 25px rgba(43, 45, 66, 0.12);
+            --btn-shadow: 0 6px 0 rgba(0, 0, 0, 0.18);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #E0F4FF;
+            background-image: 
+                radial-gradient(#FFD166 3px, transparent 3px),
+                radial-gradient(#EF476F 3px, #E0F4FF 3px);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .font-fredoka {
+            font-family: 'Fredoka', cursive, sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        /* Floating Decorative Background Icons */
+        .bg-decorations {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .floating-item {
+            position: absolute;
+            animation: floatAnim 6s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes floatAnim {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(8deg); }
+        }
+
+        /* Top Audio Controls Bar */
+        .top-controls {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .audio-btn {
+            background: #FFFFFF;
+            border: 3px solid var(--primary-blue);
+            border-radius: 50px;
+            padding: 8px 16px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 0 var(--primary-blue);
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        .audio-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 var(--primary-blue);
+        }
+
+        .audio-btn.off {
+            background: #F1F5F9;
+            border-color: #94A3B8;
+            box-shadow: 0 4px 0 #94A3B8;
+            color: #64748B;
+        }
+
+        /* Main App Container */
+        .app-container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 850px;
+            background: var(--bg-cream);
+            border-radius: 32px;
+            border: 6px solid var(--primary-yellow);
+            box-shadow: var(--card-shadow), 0 0 0 6px #FFFFFF;
+            padding: 25px;
+            margin-top: 45px;
+            margin-bottom: 20px;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Custom Buttons */
+        .btn-game {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            padding: 15px 32px;
+            border: none;
+            border-radius: 24px;
+            cursor: pointer;
+            color: #FFFFFF;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.15s ease;
+            text-shadow: 1px 2px 0 rgba(0,0,0,0.15);
+        }
+
+        .btn-game:active {
+            transform: translateY(5px);
+            box-shadow: none !important;
+        }
+
+        .btn-green {
+            background: linear-gradient(180deg, #06D6A0 0%, #05B384 100%);
+            box-shadow: 0 6px 0 #048A66;
+        }
+        .btn-green:hover { filter: brightness(1.05); }
+
+        .btn-blue {
+            background: linear-gradient(180deg, #118AB2 0%, #0D6E8E 100%);
+            box-shadow: 0 6px 0 #094D63;
+        }
+        .btn-blue:hover { filter: brightness(1.05); }
+
+        .btn-pink {
+            background: linear-gradient(180deg, #EF476F 0%, #D6335A 100%);
+            box-shadow: 0 6px 0 #A32040;
+        }
+        .btn-pink:hover { filter: brightness(1.05); }
+
+        .btn-orange {
+            background: linear-gradient(180deg, #FF9F1C 0%, #E08200 100%);
+            box-shadow: 0 6px 0 #B36800;
+        }
+        .btn-orange:hover { filter: brightness(1.05); }
+
+        .btn-purple {
+            background: linear-gradient(180deg, #8338EC 0%, #6922CC 100%);
+            box-shadow: 0 6px 0 #4B1499;
+        }
+        .btn-purple:hover { filter: brightness(1.05); }
+
+        /* Title Header */
+        .game-banner {
+            text-align: center;
+            background: linear-gradient(135deg, #FF9F1C, #EF476F, #8338EC);
+            padding: 20px;
+            border-radius: 24px;
+            color: white;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 0 rgba(131, 56, 236, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-banner h1 {
+            font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+            margin-bottom: 5px;
+        }
+
+        .game-banner p {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            font-weight: 700;
+            background: rgba(255,255,255,0.22);
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 50px;
+        }
+
+        /* Hero Illustration on Start Screen */
+        .hero-art {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0 20px;
+        }
+
+        /* Form Inputs */
+        .form-card {
+            background: #FFFFFF;
+            padding: 22px;
+            border-radius: 24px;
+            border: 4px dashed var(--primary-blue);
+            max-width: 520px;
+            margin: 0 auto 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.1rem;
+            color: var(--primary-blue);
+            margin-bottom: 6px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: 3px solid #CBD5E1;
+            border-radius: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+            color: var(--text-dark);
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary-pink);
+            background-color: #FFF9FB;
+        }
+
+        .error-msg {
+            color: var(--primary-pink);
+            font-weight: 800;
+            font-size: 0.95rem;
+            margin-top: 8px;
+            display: none;
+            text-align: center;
+        }
+
+        /* Instructions Screen */
+        .rules-list {
+            background: #FFFFFF;
+            border-radius: 24px;
+            padding: 20px;
+            border: 4px solid var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        .rule-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            border-bottom: 2px dashed #E2E8F0;
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .rule-item:last-child {
+            border-bottom: none;
+        }
+
+        .rule-badge {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--primary-yellow);
+            color: var(--text-dark);
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 3px 0 #D9A736;
+        }
+
+        /* Quiz Screen */
+        .quiz-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            background: #FFFFFF;
+            padding: 12px 18px;
+            border-radius: 20px;
+            border: 3px solid var(--primary-purple);
+        }
+
+        .badge-info {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.1rem;
+            padding: 6px 14px;
+            border-radius: 50px;
+            color: white;
+        }
+
+        .badge-num { background: var(--primary-purple); }
+        .badge-bab { background: var(--primary-orange); }
+        .badge-score { background: var(--primary-green); color: #064E3B; }
+
+        .progress-container {
+            width: 100%;
+            height: 18px;
+            background: #E2E8F0;
+            border-radius: 50px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 3px solid #FFFFFF;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #FFD166, #06D6A0, #118AB2);
+            border-radius: 50px;
+            transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .question-box {
+            background: #FFFFFF;
+            border-radius: 24px;
+            padding: 20px;
+            border: 4px solid var(--primary-blue);
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .illustration-frame {
+            width: 100%;
+            max-width: 340px;
+            height: 180px;
+            margin: 0 auto 15px;
+            background: #F8FAFC;
+            border-radius: 20px;
+            border: 3px dashed #CBD5E1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        .question-text {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-weight: 800;
+            line-height: 1.45;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .tts-btn {
+            background: #FEF3C7;
+            border: 3px solid #F59E0B;
+            color: #B45309;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1rem;
+            padding: 8px 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 0 #D97706;
+            transition: transform 0.1s;
+        }
+
+        .tts-btn:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        /* Options Grid */
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin-bottom: 15px;
+        }
+
+        .option-btn {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            padding: 14px 20px;
+            background: #FFFFFF;
+            border: 4px solid #CBD5E1;
+            border-radius: 22px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            text-align: left;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #CBD5E1;
+            transition: all 0.15s ease;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--primary-blue);
+            background: #F0F9FF;
+            transform: translateY(-2px);
+        }
+
+        .option-btn:active:not(:disabled) {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        .option-letter {
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.3rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .opt-0 .option-letter { background: var(--primary-pink); }
+        .opt-1 .option-letter { background: var(--primary-blue); }
+        .opt-2 .option-letter { background: var(--primary-orange); }
+
+        .option-btn.correct {
+            background: #D1FAE5 !important;
+            border-color: #059669 !important;
+            box-shadow: 0 5px 0 #059669 !important;
+            color: #065F46 !important;
+            animation: bounceAnim 0.5s ease;
+        }
+
+        .option-btn.wrong {
+            background: #FEE2E2 !important;
+            border-color: #DC2626 !important;
+            box-shadow: 0 5px 0 #DC2626 !important;
+            color: #991B1B !important;
+            animation: shakeAnim 0.4s ease;
+        }
+
+        @keyframes bounceAnim {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        @keyframes shakeAnim {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        /* Feedback Modal / Card */
+        .feedback-panel {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 24px;
+            text-align: center;
+            animation: popIn 0.35s ease;
+        }
+
+        .feedback-panel.correct-panel {
+            background: #ECFDF5;
+            border: 4px solid #10B981;
+        }
+
+        .feedback-panel.wrong-panel {
+            background: #FFFBEB;
+            border: 4px solid #F59E0B;
+        }
+
+        .feedback-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+
+        .correct-panel .feedback-title { color: #059669; }
+        .wrong-panel .feedback-title { color: #D97706; }
+
+        .feedback-desc {
+            font-size: 1.15rem;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            color: var(--text-dark);
+        }
+
+        /* Result Screen */
+        .result-card {
+            background: #FFFFFF;
+            border-radius: 28px;
+            padding: 25px;
+            border: 5px solid var(--primary-pink);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .predikat-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFD166, #FF9F1C);
+            color: #5C3A00;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.7rem;
+            padding: 10px 28px;
+            border-radius: 50px;
+            border: 4px solid #FFFFFF;
+            box-shadow: 0 6px 15px rgba(255, 159, 28, 0.4);
+            margin: 10px 0 20px;
+            animation: bounceAnim 1.5s infinite;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .stat-box {
+            background: #F8FAFC;
+            padding: 14px;
+            border-radius: 20px;
+            border: 3px solid #E2E8F0;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #64748B;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .student-summary {
+            background: #F0F9FF;
+            padding: 15px;
+            border-radius: 18px;
+            border: 2px dashed var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: 800;
+            font-size: 1.05rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 10px;
+        }
+
+        /* Certificate Styles */
+        .certificate-wrapper {
+            background: #FFFFFF;
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        .certificate-board {
+            width: 100%;
+            min-width: 600px;
+            background: linear-gradient(135deg, #FFFDF5 0%, #FFF5F7 50%, #F0F9FF 100%);
+            border: 12px solid #FFD166;
+            outline: 5px dashed #EF476F;
+            outline-offset: -18px;
+            border-radius: 16px;
+            padding: 40px 35px;
+            text-align: center;
+            position: relative;
+        }
+
+        .cert-corner {
+            position: absolute;
+            width: 65px;
+            height: 65px;
+        }
+        .cert-tl { top: 18px; left: 18px; }
+        .cert-tr { top: 18px; right: 18px; }
+        .cert-bl { bottom: 18px; left: 18px; }
+        .cert-br { bottom: 18px; right: 18px; }
+
+        .cert-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2.1rem;
+            color: #EF476F;
+            text-shadow: 2px 2px 0 #FFD166;
+            margin-bottom: 4px;
+        }
+
+        .cert-subtitle {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.4rem;
+            color: #8338EC;
+            background: #F3E8FF;
+            display: inline-block;
+            padding: 5px 22px;
+            border-radius: 50px;
+            margin-bottom: 18px;
+        }
+
+        .cert-given {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #475569;
+        }
+
+        .cert-name {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2.2rem;
+            color: #118AB2;
+            border-bottom: 3px dashed #118AB2;
+            display: inline-block;
+            padding: 4px 30px;
+            margin: 10px 0 15px;
+            text-transform: uppercase;
+        }
+
+        .cert-details {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .cert-materi {
+            background: #FEF3C7;
+            border: 2px solid #F59E0B;
+            padding: 10px 18px;
+            border-radius: 14px;
+            font-weight: 800;
+            color: #92400E;
+            font-size: 0.95rem;
+            margin: 12px auto;
+            max-width: 90%;
+        }
+
+        .cert-score-box {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 18px 0;
+        }
+
+        .cert-pill {
+            background: #FFFFFF;
+            border: 3px solid #06D6A0;
+            padding: 8px 20px;
+            border-radius: 16px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.15rem;
+            color: #065F46;
+        }
+
+        .cert-footer {
+            margin-top: 20px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #64748B;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0 25px;
+        }
+
+        .action-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        /* Confetti Canvas */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* Print Styles for Certificate */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #certificate-printable, #certificate-printable * {
+                visibility: visible;
+            }
+            #certificate-printable {
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100%;
+                min-width: unset;
+                box-shadow: none;
+                margin: 0;
+                padding: 30px;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .app-container {
+                padding: 18px 14px;
+                border-radius: 24px;
+            }
+            .btn-game {
+                width: 100%;
+                font-size: 1.15rem;
+                padding: 14px 20px;
+            }
+            .option-btn {
+                padding: 12px 14px;
+                font-size: 1.05rem;
+            }
+            .certificate-board {
+                min-width: 100%;
+                padding: 25px 15px;
+            }
+            .cert-title { font-size: 1.5rem; }
+            .cert-name { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Confetti Overlay -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Floating Art Supplies Background -->
+    <div class="bg-decorations" aria-hidden="true">
+        <svg class="floating-item" style="top: 8%; left: 5%; width: 55px;" viewBox="0 0 64 64">
+            <path fill="#FFD166" d="M32 4l8.5 17.2L60 24l-14 13.6L49.3 57 32 47.8 14.7 57 18 37.6 4 24l19.5-2.8z"/>
+        </svg>
+        <svg class="floating-item" style="top: 15%; right: 7%; width: 65px; animation-delay: 1s;" viewBox="0 0 64 64">
+            <rect x="26" y="6" width="12" height="40" rx="4" fill="#EF476F"/>
+            <polygon points="26,46 38,46 32,58" fill="#FFD166"/>
+            <polygon points="30,54 34,54 32,58" fill="#2B2D42"/>
+        </svg>
+        <svg class="floating-item" style="bottom: 12%; left: 6%; width: 70px; animation-delay: 2s;" viewBox="0 0 64 64">
+            <ellipse cx="32" cy="32" rx="26" ry="20" fill="#FF9F1C"/>
+            <circle cx="22" cy="24" r="5" fill="#EF476F"/>
+            <circle cx="36" cy="20" r="5" fill="#06D6A0"/>
+            <circle cx="46" cy="30" r="5" fill="#118AB2"/>
+            <circle cx="24" cy="38" r="5" fill="#8338EC"/>
+        </svg>
+        <svg class="floating-item" style="bottom: 10%; right: 6%; width: 60px; animation-delay: 1.5s;" viewBox="0 0 64 64">
+            <path fill="#06D6A0" d="M12 48c0-18 16-34 38-36-2 22-18 38-36 38l-2-2z"/>
+            <path stroke="#048A66" stroke-width="3" fill="none" d="M12 50L44 18"/>
+        </svg>
+    </div>
+
+    <!-- Top Audio Controls -->
+    <div class="top-controls">
+        <button id="btn-toggle-music" class="audio-btn" onclick="toggleMusic()">
+            <span id="music-icon">🎵</span> <span id="music-label">Musik: ON</span>
+        </button>
+        <button id="btn-toggle-sfx" class="audio-btn" onclick="toggleSfx()">
+            <span id="sfx-icon">🔊</span> <span id="sfx-label">Suara: ON</span>
+        </button>
+    </div>
+
+    <!-- Main Container -->
+    <main class="app-container">
+
+        <!-- 1. HALAMAN PEMBUKA -->
+        <section id="screen-start" class="screen active">
+            <div class="game-banner">
+                <h1>🎨 PETUALANGAN DUNIA KREATIF 🖌️</h1>
+                <p>Game Latihan Ulangan Harian Seni Rupa Kelas 2 SD</p>
+            </div>
+
+            <!-- Ilustrasi Anak Berkarya Seni (SVG Lokal) -->
+            <div class="hero-art">
+                <svg width="320" height="165" viewBox="0 0 360 185" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background Rainbow & Clouds -->
+                    <path d="M50 150 A 130 130 0 0 1 310 150" fill="none" stroke="#EF476F" stroke-width="10" stroke-linecap="round" opacity="0.35"/>
+                    <path d="M65 150 A 115 115 0 0 1 295 150" fill="none" stroke="#FFD166" stroke-width="10" stroke-linecap="round" opacity="0.45"/>
+                    <path d="M80 150 A 100 100 0 0 1 280 150" fill="none" stroke="#06D6A0" stroke-width="10" stroke-linecap="round" opacity="0.35"/>
+                    
+                    <!-- Easel / Kanvas Lukis -->
+                    <line x1="180" y1="30" x2="145" y2="170" stroke="#B45309" stroke-width="7" stroke-linecap="round"/>
+                    <line x1="180" y1="30" x2="215" y2="170" stroke="#B45309" stroke-width="7" stroke-linecap="round"/>
+                    <rect x="135" y="42" width="90" height="72" rx="8" fill="#FFFFFF" stroke="#118AB2" stroke-width="4"/>
+                    <!-- Lukisan di Kanvas -->
+                    <circle cx="160" cy="65" r="10" fill="#FFD166"/>
+                    <polygon points="145,105 170,75 195,105" fill="#06D6A0"/>
+                    <polygon points="175,105 198,80 218,105" fill="#118AB2"/>
+
+                    <!-- Karakter Anak Perempuan (Kiri) -->
+                    <circle cx="85" cy="95" r="24" fill="#FDBA74"/> <!-- Wajah -->
+                    <path d="M61 92 C61 65, 109 65, 109 92 C105 78, 65 78, 61 92 Z" fill="#2B2D42"/> <!-- Rambut -->
+                    <circle cx="58" cy="85" r="9" fill="#2B2D42"/> <!-- Kuncir Kiri -->
+                    <circle cx="112" cy="85" r="9" fill="#2B2D42"/> <!-- Kuncir Kanan -->
+                    <circle cx="78" cy="94" r="3" fill="#2B2D42"/> <!-- Mata -->
+                    <circle cx="92" cy="94" r="3" fill="#2B2D42"/>
+                    <path d="M80 103 Q85 109 90 103" stroke="#EF476F" stroke-width="3" fill="none" stroke-linecap="round"/> <!-- Senyum -->
+                    <rect x="65" y="120" width="40" height="45" rx="14" fill="#EF476F"/> <!-- Baju -->
+                    <!-- Kuas di tangan -->
+                    <line x1="105" y1="130" x2="132" y2="95" stroke="#8338EC" stroke-width="5" stroke-linecap="round"/>
+                    <circle cx="134" cy="92" r="5" fill="#FFD166"/>
+
+                    <!-- Karakter Anak Laki-laki (Kanan) -->
+                    <circle cx="275" cy="95" r="24" fill="#FDBA74"/> <!-- Wajah -->
+                    <path d="M251 90 C251 62, 299 62, 299 90 Z" fill="#2B2D42"/> <!-- Rambut -->
+                    <circle cx="268" cy="94" r="3" fill="#2B2D42"/>
+                    <circle cx="282" cy="94" r="3" fill="#2B2D42"/>
+                    <path d="M270 103 Q275 109 280 103" stroke="#118AB2" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <rect x="255" y="120" width="40" height="45" rx="14" fill="#06D6A0"/> <!-- Baju -->
+                    <!-- Palet Warna di tangan -->
+                    <ellipse cx="242" cy="132" rx="18" ry="12" fill="#FFD166" stroke="#D97706" stroke-width="2"/>
+                    <circle cx="236" cy="130" r="3" fill="#EF476F"/>
+                    <circle cx="244" cy="128" r="3" fill="#118AB2"/>
+                    <circle cx="248" cy="135" r="3" fill="#8338EC"/>
+
+                    <!-- Bintang & Krayon Dekorasi -->
+                    <polygon points="35,35 39,45 50,45 41,51 44,61 35,55 26,61 29,51 20,45 31,45" fill="#FFD166"/>
+                    <polygon points="325,30 328,38 337,38 330,43 332,51 325,46 318,51 320,43 313,38 322,38" fill="#FF9F1C"/>
+                </svg>
+            </div>
+
+            <div class="form-card">
+                <h2 style="text-align: center; color: var(--primary-pink); margin-bottom: 14px; font-size: 1.4rem;">
+                    ✏️ Isi Data Dirimu Dulu Ya!
+                </h2>
+                <div class="input-group">
+                    <label for="input-nama">1. Nama Lengkap Murid:</label>
+                    <input type="text" id="input-nama" placeholder="Contoh: Raka Pratama" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="input-kelas">2. Kelas:</label>
+                    <input type="text" id="input-kelas" placeholder="Contoh: 2A / 2 SD" value="Kelas 2 SD" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="input-sekolah">3. Nama Sekolah:</label>
+                    <input type="text" id="input-sekolah" placeholder="Contoh: SD Negeri Nusantara 01" autocomplete="off">
+                </div>
+                <p id="form-error" class="error-msg">⚠️ Yuk, isi Nama Lengkap, Kelas, dan Nama Sekolah terlebih dahulu!</p>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="btn-game btn-green" onclick="goToInstructions()">
+                    🚀 MULAI BERMAIN
+                </button>
+            </div>
+        </section>
+
+        <!-- 2. HALAMAN PETUNJUK -->
+        <section id="screen-instructions" class="screen">
+            <div class="game-banner" style="background: linear-gradient(135deg, #118AB2, #06D6A0);">
+                <h2>📖 PETUNJUK BERMAIN</h2>
+                <p>Halo, <span id="greet-name">Seniman Cilik</span>! Yuk baca aturannya!</p>
+            </div>
+
+            <div class="rules-list">
+                <div class="rule-item">
+                    <div class="rule-badge">1</div>
+                    <div>Bacalah setiap soal dengan teliti dan tenang.</div>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-badge">2</div>
+                    <div>Perhatikan gambar ilustrasi seni yang tersedia.</div>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-badge">3</div>
+                    <div>Pilih jawaban yang paling tepat (A, B, C, atau Benar/Salah).</div>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-badge">4</div>
+                    <div>Kerjakan semua <strong>30 soal</strong> (Bab 3 & Bab 4 Seni Rupa).</div>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-badge">5</div>
+                    <div>Setiap jawaban benar mendapat poin & bintang. Jawaban salah ada pembahasannya!</div>
+                </div>
+                <div class="rule-item">
+                    <div class="rule-badge">⭐</div>
+                    <div>Kumpulkan bintang sebanyak-banyaknya dan raih <strong>Sertifikat Bintang Seni Cilik</strong>!</div>
+                </div>
+            </div>
+
+            <div class="action-row">
+                <button class="btn-game btn-orange" onclick="showScreen('screen-start')">
+                    ⬅️ KEMBALI
+                </button>
+                <button class="btn-game btn-pink" onclick="startQuiz()">
+                    🎯 AYO MULAI SOAL!
+                </button>
+            </div>
+        </section>
+
+        <!-- 3. HALAMAN SOAL -->
+        <section id="screen-quiz" class="screen">
+            <div class="quiz-header">
+                <span class="badge-info badge-num" id="q-counter">Soal 1 / 30</span>
+                <span class="badge-info badge-bab" id="q-bab">Bab 3: Menggali Ide</span>
+                <span class="badge-info badge-score" id="q-score">⭐ Benar: 0</span>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <div class="question-box">
+                <div class="illustration-frame" id="q-illustration">
+                    <!-- SVG Ilustrasi Soal Dirender di Sini -->
+                </div>
+                <div class="question-text" id="q-text">
+                    Memuat pertanyaan...
+                </div>
+                <button class="tts-btn" onclick="speakCurrentQuestion()">
+                    🗣️ Bacakan Soal & Pilihan
+                </button>
+            </div>
+
+            <div class="options-grid" id="options-container">
+                <!-- Tombol Pilihan Jawaban Dirender di Sini -->
+            </div>
+
+            <!-- Panel Pembahasan -->
+            <div id="feedback-panel" class="feedback-panel">
+                <div class="feedback-title" id="feedback-title">WAH, HEBAT SEKALI!</div>
+                <div class="feedback-desc" id="feedback-desc">Penjelasan jawaban...</div>
+                <button class="btn-game btn-blue" id="btn-next" onclick="nextQuestion()">
+                    LANJUT ➡️
+                </button>
+            </div>
+        </section>
+
+        <!-- 4. HALAMAN HASIL AKHIR & SERTIFIKAT -->
+        <section id="screen-result" class="screen">
+            <div class="game-banner" style="background: linear-gradient(135deg, #8338EC, #EF476F);">
+                <h1>🏆 HASIL PETUALANGANMU! 🏆</h1>
+                <p>Selamat telah menyelesaikan semua tantangan!</p>
+            </div>
+
+            <div class="result-card">
+                <div style="font-size: 3.5rem; margin-bottom: 5px;">🏆🌟🎨</div>
+                <div class="predikat-badge" id="res-predikat">BINTANG SENI!</div>
+
+                <div class="student-summary">
+                    <span>👤 Nama: <strong id="res-nama">-</strong></span>
+                    <span>🏫 Kelas: <strong id="res-kelas">-</strong></span>
+                    <span>🏢 Sekolah: <strong id="res-sekolah">-</strong></span>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-box" style="border-color: #10B981; background: #ECFDF5;">
+                        <div class="stat-label">Jawaban Benar</div>
+                        <div class="stat-value" style="color: #059669;" id="res-benar">0</div>
+                    </div>
+                    <div class="stat-box" style="border-color: #EF4444; background: #FEF2F2;">
+                        <div class="stat-label">Jawaban Salah</div>
+                        <div class="stat-value" style="color: #DC2626;" id="res-salah">0</div>
+                    </div>
+                    <div class="stat-box" style="border-color: #3B82F6; background: #EFF6FF;">
+                        <div class="stat-label">Nilai Akhir</div>
+                        <div class="stat-value" style="color: #1D4ED8;" id="res-nilai">0</div>
+                    </div>
+                    <div class="stat-box" style="border-color: #F59E0B; background: #FFFBEB;">
+                        <div class="stat-label">Keberhasilan</div>
+                        <div class="stat-value" style="color: #B45309;" id="res-persen">0%</div>
+                    </div>
+                    <div class="stat-box" style="border-color: #8B5CF6; background: #F5F3FF;">
+                        <div class="stat-label">Durasi Waktu</div>
+                        <div class="stat-value" style="color: #6D28D9;" id="res-durasi">00:00</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SERTIFIKAT PENGHARGAAN -->
+            <h2 style="text-align: center; color: var(--primary-purple); margin-bottom: 12px; font-size: 1.5rem;">
+                🎓 SERTIFIKAT PENGHARGAANMU
+            </h2>
+
+            <div class="certificate-wrapper">
+                <div class="certificate-board" id="certificate-printable">
+                    <!-- Dekorasi Sudut Sertifikat -->
+                    <svg class="cert-corner cert-tl" viewBox="0 0 64 64">
+                        <ellipse cx="32" cy="32" rx="26" ry="20" fill="#FF9F1C"/>
+                        <circle cx="22" cy="24" r="4" fill="#EF476F"/>
+                        <circle cx="36" cy="20" r="4" fill="#06D6A0"/>
+                        <circle cx="46" cy="30" r="4" fill="#118AB2"/>
+                        <circle cx="24" cy="38" r="4" fill="#8338EC"/>
+                    </svg>
+                    <svg class="cert-corner cert-tr" viewBox="0 0 64 64">
+                        <path fill="#FFD166" d="M32 4l8.5 17.2L60 24l-14 13.6L49.3 57 32 47.8 14.7 57 18 37.6 4 24l19.5-2.8z"/>
+                    </svg>
+                    <svg class="cert-corner cert-bl" viewBox="0 0 64 64">
+                        <rect x="14" y="10" width="10" height="44" rx="4" fill="#EF476F" transform="rotate(-25 19 32)"/>
+                        <rect x="34" y="10" width="10" height="44" rx="4" fill="#118AB2" transform="rotate(20 39 32)"/>
+                    </svg>
+                    <svg class="cert-corner cert-br" viewBox="0 0 64 64">
+                        <path fill="#06D6A0" d="M12 48c0-18 16-34 38-36-2 22-18 38-36 38l-2-2z"/>
+                        <circle cx="42" cy="42" r="10" fill="#FFD166"/>
+                    </svg>
+
+                    <div class="cert-title">SERTIFIKAT PENGHARGAAN</div>
+                    <div class="cert-subtitle">⭐ BINTANG SENI CILIK ⭐</div>
+                    
+                    <div class="cert-given">Diberikan kepada:</div>
+                    <div class="cert-name" id="cert-nama">NAMA MURID</div>
+
+                    <div class="cert-details">
+                        Kelas: <strong id="cert-kelas">-</strong> &nbsp;|&nbsp; Sekolah: <strong id="cert-sekolah">-</strong><br>
+                        Atas keberhasilannya menyelesaikan Latihan Ulangan Harian Seni Rupa Kelas 2 SD dengan materi:
+                    </div>
+
+                    <div class="cert-materi">
+                        "MENGGALI IDE UNTUK BERKARYA DAN EKSPLORASI TEKNIK, ALAT, DAN BAHAN UNTUK BERKARYA"
+                    </div>
+
+                    <div class="cert-score-box">
+                        <div class="cert-pill">Nilai Akhir: <span id="cert-nilai">100</span></div>
+                        <div class="cert-pill" style="border-color: #FF9F1C; color: #92400E;">Predikat: <span id="cert-predikat">BINTANG SENI!</span></div>
+                    </div>
+
+                    <div class="cert-footer">
+                        <div>Tanggal: <span id="cert-tanggal">-</span></div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.5rem;">🏅</div>
+                            <div style="border-top: 2px solid #64748B; padding-top: 4px;">Petualangan Dunia Kreatif</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-row">
+                <button class="btn-game btn-blue" onclick="printCertificate()">
+                    🖨️ CETAK SERTIFIKAT
+                </button>
+                <button class="btn-game btn-purple" onclick="downloadCertificateImage()">
+                    📥 DOWNLOAD SERTIFIKAT / PDF
+                </button>
+                <button class="btn-game btn-green" onclick="startQuiz()">
+                    🔄 ULANGI PERMAINAN
+                </button>
+                <button class="btn-game btn-orange" onclick="showScreen('screen-start')">
+                    🏠 HALAMAN UTAMA
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        /* ==========================================================================
+           1. KOLEKSI ILUSTRASI SVG LOKAL (OFFLINE READY)
+           ========================================================================== */
+        const SVG_ARTS = {
+            flower: `<svg viewBox="0 0 200 130" width="220" height="130">
+                <rect width="200" height="130" rx="15" fill="#E0F2FE"/>
+                <rect y="95" width="200" height="35" fill="#86EFAC"/>
+                <line x1="100" y1="55" x2="100" y2="115" stroke="#16A34A" stroke-width="6"/>
+                <ellipse cx="85" cy="85" rx="14" ry="7" fill="#22C55E" transform="rotate(-25 85 85)"/>
+                <ellipse cx="115" cy="85" rx="14" ry="7" fill="#22C55E" transform="rotate(25 115 85)"/>
+                <circle cx="100" cy="32" r="14" fill="#F43F5E"/>
+                <circle cx="122" cy="48" r="14" fill="#F43F5E"/>
+                <circle cx="114" cy="72" r="14" fill="#F43F5E"/>
+                <circle cx="86" cy="72" r="14" fill="#F43F5E"/>
+                <circle cx="78" cy="48" r="14" fill="#F43F5E"/>
+                <circle cx="100" cy="52" r="14" fill="#FACC15"/>
+            </svg>`,
+            butterfly: `<svg viewBox="0 0 200 130" width="220" height="130">
+                <rect width="200" height="130" rx="15" fill="#FEF9C3"/>
+                <ellipse cx="72" cy="50" rx="28" ry="22" fill="#F97316" transform="rotate(-20 72 50)"/>
+                <ellipse cx="128" cy="50" rx="28" ry="22" fill="#F97316" transform="rotate(20 128 50)"/>
+                <ellipse cx="76" cy="82" rx="22" ry="18" fill="#FACC15" transform="rotate(15 76 82)"/>
+                <ellipse cx="124" cy="82" rx="22" ry="18" fill="#FACC15" transform="rotate(-15 124 82)"/>
+                <rect x="95" y="35" width="10" height="60" rx="5" fill="#334155"/>
+                <path d="M97 35 Q85 18 78 22" stroke="#334155" stroke-width="3" fill="none"/>
+                <path d="M103 35 Q115 18 122 22" stroke="#334155" stroke-width="3" fill="none"/>
+            </svg>`,
+            rainbow: `<svg viewBox="0 0 200 130" width="220" height="130">
+                <rect width="200" height="130" rx="15" fill="#DBEAFE"/>
+                <path d="M30 110 A 70 70 0 0 1 170 110" fill="none" stroke="#EF4444" stroke-width="8"/>
+                <path d="M38 110 A 62 62 0 0 1 162 110" fill="none" stroke="#F97316" stroke-width="8"/>
+                <path d="M46 110 A 54 54 0 0 1 154 110" fill="none" stroke="#EAB308" stroke-width="8"/>
+                <path d="M54 110 A 46 46 0 0 1 146 110" fill="none" stroke="#22C55E" stroke-width="8"/>
+                <path d="M62 110 A 38 38 0 0 1 138 110" fill="none" stroke="#3B82F6" stroke-width="8"/>
+                <circle cx="35" cy="110" r="16" fill="#FFFFFF"/>
+                <circle cx="52" cy="112" r="14" fill="#FFFFFF"/>
+                <circle cx="165" cy="110" r="16" fill="#FFFFFF"/>
+                <circle cx="148" cy="112" r="14" fill="#FFFFFF"/>
+            </svg>`,
+            beach: `<svg viewBox="0 0 200 130" width="220" height="130">
+                <rect width="200" height="70" rx="10" fill="#7DD3FC"/>
+                <circle cx="165" cy="28" r="15" fill="#FDE047"/>
+                <rect y="65" width="200" height="30" fill="#0284C7"/>
+                <rect y="92" width="200" height="38" fill="#FDE68A"/>
+                <rect x="42" y="45" width="7" height="52" fill="#92400E"/>
+                <path d="M45 45 Q20 35 15 55 Q35 50 45 45 Z" fill="#16A34A"/>
+                <path d="M45 45 Q70 35 75 55 Q55 50 45 45 Z" fill="#22C55E"/>
+            </svg>`,
+            holiday: `<svg viewBox="0 0 200 130" width="220" height="130">
+                <rect width="200" height="130" rx="15" fill="#F3E8FF"/>
+                <polygon points="25,115 75,45 125,115" fill="#4ADE80"/>
+                <polygon points="85,115 135,35 185,115" fill="#22C55E"/>
+                <circle cx="45" cy="30" r="14" fill="#FACC15"/>
+                <rect x="75" y="88" width="50" height="24" rx="8" fill="#EF4444"/>
+                <circle cx="88" cy="112" r="6" fill="#1E293B"/>
+                <circle cx="112" cy="112" r="6" fill="#1E293B"/>
+            </svg>`,
+            fairyTale: `<svg viewBox="0 0 200 130" width="220" height="130">
+                <rect width="200" height="130" rx="15" fill="#1E1B4B"/>
+                <circle cx="160" cy="30" r="14" fill="#FEF08A"/>
+                <rect x="65" y="55" width="70" height="60" fill="#F472B6"/>
+                <polygon points="58,55 100,20 142,55" fill="#8B5CF6"/>
+                <rect x="90" y="85" width="20" height="30" rx="10" fill="#FDE047"/>
+                <circle cx="35" cy="35" r="3" fill="#FFF"/>
+                <circle cx="125" cy="25" r="3" fill="#FFF"/>
+            </svg>`,
+            cat: `<svg viewBox="0 0 200 130" width="220" height="130">
+                <rect width="200" height="130" rx="15" fill="#FFEDD5"/>
+                <polygon points="65,50 75,20 92,42" fill="#FB923C"/>
+                <polygon points="135,50 125,20 108,42" fill="#FB923C"/>
+                <circle cx="100" cy="70" r="36" fill="#FDBA74"/>
+                <circle cx="88" cy="64" r="4" fill="#1E293B"/>
+                <circle cx="112" cy="64" r="4" fill="#1E293B"/>
+                <polygon points="96,74 104,74 100,80" fill="#F43F5E"/>
+                <path d="M90 84 Q100 92 110 84" stroke="#1E293B" stroke-width="3" fill="none"/>
+            </svg>`,
+            crayons: `<svg viewBox="0 0 200 130" width="220" height="130">
+                <rect width="200" height="130" rx="15" fill="#F1F5F9"/>
+                <g transform="translate(45, 25)">
+                    <polygon points="10,0 20,18 0,18" fill="#EF4444"/>
+                    <rect x="0" y="18" width="20" height="65" fill="#F87171"/>
+                    <rect x="0" y="30" width="20" height="12" fill="#1E293B"/>
+                </g>
+                <g transform="translate(80, 20)">
+                    <polygon points="10,0 20,18 0,18" fill="#EAB308"/>
+                    <rect x="0" y="18" width="20" height="70" fill="#FACC15"/>
+                    <rect x="0" y="30" width="20" height="12" fill="#1E293B"/>
+                </g>
+                <g transform="translate(115, 25)">
+                    <polygon points="10,0 20,18 0,18" fill="#3B82F6"/>
+                    <rect x="0" y="18" width="20" height="65" fill="#60A5FA"/>
+                    <rect x="0" y="30" width="20" height="12" fill="#1E293B"/>
+                </g>
+            </svg>`,
+            paintbrush: `<svg viewBox="0 0 200 130" width="220" height="130">
+                <rect width="200" height="130" rx="15" fill="#ECFEFF"/>
+                <ellipse cx="65" cy="70" rx="38" ry="26" fill="#FDE68A" stroke="#D97706" stroke-width="3"/>
+                <circle cx="52" cy="60" r="6" fill="#EF4444"/>
+                <circle cx="72" cy="56" r="6" fill="#3B82F6"/>
+                <circle cx="82" cy="74" r="6" fill="#22C55E"/>
+                <line x1="110" y1="105" x2="155" y2="35" stroke="#92400E" stroke-width="8" stroke-linecap="round"/>
+                <path d="M150 38 Q168 15 172 32 Q165 45 150 38 Z" fill="#EF4444"/>
+            </svg>`,
+            collageLeaf: `<svg viewBox="0 0 200 130" width="220" height="130">
+                <rect width="200" height="130" rx="15" fill="#FEF3C7"/>
+                <rect x="35" y="15" width="130" height="100" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="3"/>
+                <!-- Kolase Ikan dari Daun Kering -->
+                <ellipse cx="105" cy="65" rx="32" ry="20" fill="#D97706"/>
+                <polygon points="73,65 52,48 52,82" fill="#B45309"/>
+                <circle cx="122" cy="60" r="4" fill="#1E293B"/>
+                <path d="M85 65 L125 65" stroke="#92400E" stroke-width="2"/>
+            </svg>`,
+            clayAnimal: `<svg viewBox="0 0 200 130" width="220" height="130">
+                <rect width="200" height="130" rx="15" fill="#FCE7F3"/>
+                <!-- Patung Gajah/Hewan dari Plastisin -->
+                <ellipse cx="105" cy="75" rx="35" ry="25" fill="#EC4899"/>
+                <circle cx="72" cy="62" r="20" fill="#F472B6"/>
+                <path d="M55 68 Q40 75 45 92" stroke="#F472B6" stroke-width="9" fill="none" stroke-linecap="round"/>
+                <rect x="82" y="92" width="12" height="22" rx="5" fill="#DB2777"/>
+                <rect x="115" y="92" width="12" height="22" rx="5" fill="#DB2777"/>
+                <circle cx="66" cy="58" r="3" fill="#1E293B"/>
+            </svg>`,
+            cardboardHouse: `<svg viewBox="0 0 200 130" width="220" height="130">
+                <rect width="200" height="130" rx="15" fill="#ECFDF5"/>
+                <!-- Rumah Kardus 3D -->
+                <rect x="55" y="55" width="60" height="55" fill="#D97706" stroke="#92400E" stroke-width="2"/>
+                <polygon points="115,55 150,42 150,97 115,110" fill="#B45309" stroke="#78350F" stroke-width="2"/>
+                <polygon points="48,55 85,22 122,55" fill="#F59E0B" stroke="#92400E" stroke-width="2"/>
+                <polygon points="85,22 122,12 156,42 122,55" fill="#D97706" stroke="#92400E" stroke-width="2"/>
+                <rect x="75" y="78" width="18" height="32" fill="#FEF3C7"/>
+                <rect x="126" y="65" width="14" height="16" fill="#FEF3C7"/>
+            </svg>`,
+            scissorsGlue: `<svg viewBox="0 0 200 130" width="220" height="130">
+                <rect width="200" height="130" rx="15" fill="#F3E8FF"/>
+                <!-- Gunting -->
+                <circle cx="60" cy="45" r="12" fill="none" stroke="#EF4444" stroke-width="5"/>
+                <circle cx="60" cy="85" r="12" fill="none" stroke="#EF4444" stroke-width="5"/>
+                <line x1="70" y1="52" x2="115" y2="75" stroke="#64748B" stroke-width="5" stroke-linecap="round"/>
+                <line x1="70" y1="78" x2="115" y2="55" stroke="#94A3B8" stroke-width="5" stroke-linecap="round"/>
+                <!-- Botol Lem -->
+                <rect x="130" y="45" width="32" height="55" rx="6" fill="#FACC15" stroke="#CA8A04" stroke-width="2"/>
+                <polygon points="138,45 154,45 146,25" fill="#EF4444"/>
+            </svg>`,
+            origami: `<svg viewBox="0 0 200 130" width="220" height="130">
+                <rect width="200" height="130" rx="15" fill="#E0F2FE"/>
+                <!-- Perahu Kertas Lipat -->
+                <polygon points="40,75 160,75 140,105 60,105" fill="#38BDF8" stroke="#0284C7" stroke-width="3"/>
+                <polygon points="65,75 100,25 100,75" fill="#FACC15" stroke="#CA8A04" stroke-width="2"/>
+                <polygon points="103,75 103,35 138,75" fill="#F43F5E" stroke="#BE123C" stroke-width="2"/>
+            </svg>`,
+            painting2D: `<svg viewBox="0 0 200 130" width="220" height="130">
+                <rect width="200" height="130" rx="15" fill="#FEF2F2"/>
+                <rect x="45" y="18" width="110" height="94" rx="6" fill="#FFFFFF" stroke="#B45309" stroke-width="6"/>
+                <circle cx="80" cy="48" r="12" fill="#FACC15"/>
+                <path d="M52 95 Q85 60 110 85 T148 75 L148 105 L52 105 Z" fill="#22C55E"/>
+            </svg>`
+        };
+
+        /* ==========================================================================
+           2. BANK DATA 30 SOAL (15 BAB 3 + 15 BAB 4)
+           Komposisi: 20 Pilihan Ganda, 5 Benar/Salah, 5 Berbasis Gambar Situasi
+           ========================================================================== */
+        const QUESTION_BANK = [
+            // --- BAB 3: MENGGALI IDE UNTUK BERKARYA (15 SOAL) ---
+            {
+                id: 1, bab: "Bab 3: Menggali Ide", type: "pg",
+                svg: SVG_ARTS.flower,
+                question: "Rani melihat bunga mawar yang indah di halaman rumah. Rani ingin menggambarnya. Ide gambar Rani berasal dari ....",
+                options: ["Lingkungan sekitar", "Suara klakson mobil", "Permainan komputer"],
+                correctText: "Lingkungan sekitar",
+                explanation: "Tumbuhan dan bunga di halaman rumah adalah bagian dari lingkungan sekitar yang dapat menjadi sumber ide menggambar."
+            },
+            {
+                id: 2, bab: "Bab 3: Menggali Ide", type: "pg",
+                svg: SVG_ARTS.holiday,
+                question: "Budi menggambar suasana saat ia pergi berlibur bersama keluarga. Sumber gagasan Budi berasal dari ....",
+                options: ["Pengalaman sehari-hari", "Warna papan tulis", "Bunyi bel sekolah"],
+                correctText: "Pengalaman sehari-hari",
+                explanation: "Kejadian yang pernah kita alami sendiri seperti berlibur disebut pengalaman sehari-hari."
+            },
+            {
+                id: 3, bab: "Bab 3: Menggali Ide", type: "pg",
+                svg: SVG_ARTS.butterfly,
+                question: "Ketika mengamati kupu-kupu berwarna cerah di taman, kita dapat memperoleh ide untuk membuat ....",
+                options: ["Gambar kupu-kupu yang indah", "Gambar truk pengangkut pasir", "Gambar gedung bertingkat"],
+                correctText: "Gambar kupu-kupu yang indah",
+                explanation: "Mengamati hewan di sekitar seperti kupu-kupu memberi inspirasi untuk menggambar bentuk dan warna hewan tersebut."
+            },
+            {
+                id: 4, bab: "Bab 3: Menggali Ide", type: "pg",
+                svg: SVG_ARTS.rainbow,
+                question: "Setelah hujan reda, muncul pelangi melengkung di langit. Ide menggambar pelangi berasal dari ....",
+                options: ["Pemandangan alam", "Suara sepatu", "Rasa makanan"],
+                correctText: "Pemandangan alam",
+                explanation: "Pelangi, gunung, dan langit adalah pemandangan alam sekitar yang indah untuk dijadikan ide karya seni."
+            },
+            {
+                id: 5, bab: "Bab 3: Menggali Ide", type: "pg",
+                svg: SVG_ARTS.fairyTale,
+                question: "Siti suka membaca buku dongeng tentang istana awan, lalu ia menggambarnya. Ide Siti berasal dari ....",
+                options: ["Cerita atau dongeng", "Benda di dapur", "Suara hujan"],
+                correctText: "Cerita atau dongeng",
+                explanation: "Membaca atau mendengarkan cerita dongeng dapat memunculkan khayalan dan ide gambar yang menarik."
+            },
+            {
+                id: 6, bab: "Bab 3: Menggali Ide", type: "pg",
+                svg: SVG_ARTS.cat,
+                question: "Edo sangat menyayangi kucing peliharaannya di rumah. Edo dapat mengembangkan ide karya dua dimensi dengan cara ....",
+                options: ["Menggambar hewan kesayangan", "Membuat kapal dari besi", "Menjahit baju baru"],
+                correctText: "Menggambar hewan kesayangan",
+                explanation: "Menggambar hewan kesayangan seperti kucing atau kelinci adalah cara mengembangkan ide karya dua dimensi."
+            },
+            {
+                id: 7, bab: "Bab 3: Menggali Ide", type: "pg",
+                svg: SVG_ARTS.clayAnimal,
+                question: "Dayu ingin membuat karya tiga dimensi berbentuk hewan lucu dari plastisin. Ide Dayu terinspirasi dari ....",
+                options: ["Bentuk hewan di sekitar", "Suara angin malam", "Rasa buah jeruk"],
+                correctText: "Bentuk hewan di sekitar",
+                explanation: "Mengamati bentuk tubuh hewan membantu kita membuat tiruan bentuk hewan tiga dimensi dari plastisin."
+            },
+            {
+                id: 8, bab: "Bab 3: Menggali Ide", type: "pg",
+                svg: SVG_ARTS.cardboardHouse,
+                question: "Udin melihat kotak kardus bekas sepatu di rumah, lalu terinspirasi membuat rumah-rumahan. Udin mengembangkan ide dari ....",
+                options: ["Benda-benda di sekitar", "Lagu daerah", "Suara televisi"],
+                correctText: "Benda-benda di sekitar",
+                explanation: "Benda-benda di rumah seperti kardus dan botol dapat diamati dan diubah menjadi karya tiga dimensi."
+            },
+            {
+                id: 9, bab: "Bab 3: Menggali Ide", type: "pg",
+                svg: SVG_ARTS.holiday,
+                question: "Lani dan teman-teman bermain lompat tali di halaman sekolah. Kegiatan bermain bersama teman dapat menjadi ide untuk ....",
+                options: ["Membuat gambar kegiatan bermain", "Membuat batu bata", "Memasak nasi goreng"],
+                correctText: "Membuat gambar kegiatan bermain",
+                explanation: "Permainan dan kegiatan seru bersama teman bisa dituangkan menjadi gambar cerita."
+            },
+            {
+                id: 10, bab: "Bab 3: Menggali Ide", type: "pg",
+                svg: SVG_ARTS.painting2D,
+                question: "Karya gambar pemandangan gunung dan sawah yang dibuat di atas kertas termasuk karya dua dimensi karena memiliki ....",
+                options: ["Panjang dan lebar", "Panjang, lebar, dan tinggi", "Berat dan volume"],
+                correctText: "Panjang dan lebar",
+                explanation: "Karya dua dimensi (seperti gambar dan lukisan) hanya memiliki dua ukuran, yaitu panjang dan lebar."
+            },
+            {
+                id: 11, bab: "Bab 3: Menggali Ide", type: "bs",
+                svg: SVG_ARTS.fairyTale,
+                question: "BENAR atau SALAH: Imajinasi dan khayalan anak tidak boleh digunakan untuk membuat gambar.",
+                options: ["Benar", "Salah"],
+                correctText: "Salah",
+                explanation: "Pernyataan tersebut SALAH. Imajinasi dan khayalan justru sangat bagus sebagai sumber ide berkarya seni!"
+            },
+            {
+                id: 12, bab: "Bab 3: Menggali Ide", type: "bs",
+                svg: SVG_ARTS.flower,
+                question: "BENAR atau SALAH: Mengamati bentuk, warna, dan pola pada daun dapat memberi inspirasi karya seni.",
+                options: ["Benar", "Salah"],
+                correctText: "Benar",
+                explanation: "Pernyataan tersebut BENAR. Bentuk, warna, dan garis tulang daun sangat indah dijadikan pola karya seni."
+            },
+            {
+                id: 13, bab: "Bab 3: Menggali Ide", type: "bs",
+                svg: SVG_ARTS.origami,
+                question: "BENAR atau SALAH: Membuat bentuk bunga dari kertas lipat adalah contoh pengembangan ide karya tiga dimensi.",
+                options: ["Benar", "Salah"],
+                correctText: "Benar",
+                explanation: "Pernyataan tersebut BENAR. Bunga kertas memiliki bentuk bervolume (panjang, lebar, tinggi) sehingga termasuk karya tiga dimensi."
+            },
+            {
+                id: 14, bab: "Bab 3: Menggali Ide", type: "img",
+                svg: SVG_ARTS.beach,
+                question: "Perhatikan gambar di atas! Jika kamu menggambar suasana seperti pada gambar tersebut, sumber gagasanmu berasal dari ....",
+                options: ["Pemandangan pantai", "Suasana ruang kelas", "Benda di kamar tidur"],
+                correctText: "Pemandangan pantai",
+                explanation: "Gambar menunjukkan laut, matahari, pasir, dan pohon kelapa yang merupakan pemandangan alam pantai."
+            },
+            {
+                id: 15, bab: "Bab 3: Menggali Ide", type: "img",
+                svg: SVG_ARTS.collageLeaf,
+                question: "Perhatikan gambar karya ikan dari daun kering di atas! Sumber bahan dan ide karya tersebut memanfaatkan ....",
+                options: ["Bahan alam di sekitar", "Kaca jendela rumah", "Logam besi berat"],
+                correctText: "Bahan alam di sekitar",
+                explanation: "Daun-daun kering yang gugur di halaman adalah bahan alam yang kreatif untuk dibuat kolase bentuk hewan."
+            },
+
+            // --- BAB 4: EKSPLORASI TEKNIK, ALAT, DAN BAHAN (15 SOAL) ---
+            {
+                id: 16, bab: "Bab 4: Alat & Teknik", type: "pg",
+                svg: SVG_ARTS.crayons,
+                question: "Alat yang sering digunakan untuk mewarnai gambar agar terlihat cerah dan tebal adalah ....",
+                options: ["Krayon", "Penggaris", "Penghapus"],
+                correctText: "Krayon",
+                explanation: "Krayon, pensil warna, dan spidol adalah alat mewarnai. Penggaris untuk mengukur dan penghapus untuk menghapus pensil."
+            },
+            {
+                id: 17, bab: "Bab 4: Alat & Teknik", type: "pg",
+                svg: SVG_ARTS.clayAnimal,
+                question: "Bahan lunak berwarna-warni yang mudah ditekan dan dibentuk menjadi patung hewan kecil adalah ....",
+                options: ["Plastisin", "Kaca", "Batu kali"],
+                correctText: "Plastisin",
+                explanation: "Plastisin bersifat lunak dan lentur sehingga mudah dibentuk dengan tangan oleh anak-anak."
+            },
+            {
+                id: 18, bab: "Bab 4: Alat & Teknik", type: "pg",
+                svg: SVG_ARTS.collageLeaf,
+                question: "Membuat karya seni dengan cara menempelkan potongan kertas, biji-bijian, atau daun kering pada pola gambar disebut teknik ....",
+                options: ["Kolase", "Melipat", "Mencetak"],
+                correctText: "Kolase",
+                explanation: "Teknik kolase adalah menempelkan berbagai potongan bahan (kertas, daun, biji) hingga membentuk gambar yang indah."
+            },
+            {
+                id: 19, bab: "Bab 4: Alat & Teknik", type: "pg",
+                svg: SVG_ARTS.cardboardHouse,
+                question: "Karya seni yang memiliki ukuran panjang, lebar, dan tinggi sehingga dapat dilihat dari berbagai arah disebut karya ....",
+                options: ["Tiga dimensi", "Dua dimensi", "Satu dimensi"],
+                correctText: "Tiga dimensi",
+                explanation: "Karya tiga dimensi memiliki ruang/volume (panjang, lebar, dan tinggi), contohnya patung dan kerajinan kardus."
+            },
+            {
+                id: 20, bab: "Bab 4: Alat & Teknik", type: "pg",
+                svg: SVG_ARTS.cardboardHouse,
+                question: "Untuk membuat kerajinan rumah-rumahan sederhana yang kokoh dan ramah lingkungan, bahan bekas yang aman digunakan adalah ....",
+                options: ["Kardus bekas", "Pecahan kaca", "Kaleng tajam"],
+                correctText: "Kardus bekas",
+                explanation: "Kardus bekas mudah digunting, dilem, dan aman digunakan anak kelas 2 SD untuk merakit rumah-rumahan."
+            },
+            {
+                id: 21, bab: "Bab 4: Alat & Teknik", type: "pg",
+                svg: SVG_ARTS.scissorsGlue,
+                question: "Alat yang digunakan untuk memotong kertas gambar menjadi bentuk kecil-kecil adalah ....",
+                options: ["Gunting", "Kuas", "Palet"],
+                correctText: "Gunting",
+                explanation: "Gunting digunakan untuk memotong kertas atau kain. Gunakan gunting ujung tumpul agar selalu aman ya!"
+            },
+            {
+                id: 22, bab: "Bab 4: Alat & Teknik", type: "pg",
+                svg: SVG_ARTS.origami,
+                question: "Membuat bentuk perahu atau pesawat dari selembar kertas tanpa menggunakan gunting dan lem menggunakan teknik ....",
+                options: ["Melipat", "Mewarnai", "Memahat"],
+                correctText: "Melipat",
+                explanation: "Teknik melipat kertas (origami) mengubah kertas datar menjadi bentuk perahu, burung, atau bunga."
+            },
+            {
+                id: 23, bab: "Bab 4: Alat & Teknik", type: "pg",
+                svg: SVG_ARTS.flower,
+                question: "Biji kacang hijau, biji jagung, dan ranting kering termasuk bahan berkarya yang berasal dari ....",
+                options: ["Bahan alam", "Bahan plastik", "Bahan logam"],
+                correctText: "Bahan alam",
+                explanation: "Biji-bijian, daun kering, dan ranting berasal dari tumbuhan di alam sehingga disebut bahan alam."
+            },
+            {
+                id: 24, bab: "Bab 4: Alat & Teknik", type: "pg",
+                svg: SVG_ARTS.painting2D,
+                question: "Sebelum mewarnai gambar dengan krayon, kita membuat sketsa garis gambar menggunakan ....",
+                options: ["Pensil", "Lem kertas", "Gunting"],
+                correctText: "Pensil",
+                explanation: "Pensil digunakan untuk menggambar sketsa awal karena mudah dihapus jika ada garis yang kurang tepat."
+            },
+            {
+                id: 25, bab: "Bab 4: Alat & Teknik", type: "pg",
+                svg: SVG_ARTS.clayAnimal,
+                question: "Teknik menekan, memijit, dan memilin tanah liat atau plastisin menjadi bentuk benda disebut teknik ....",
+                options: ["Membentuk", "Menggunting", "Menyulam"],
+                correctText: "Membentuk",
+                explanation: "Tanah liat dan plastisin diolah menggunakan teknik membentuk dengan jari-jari tangan."
+            },
+            {
+                id: 26, bab: "Bab 4: Alat & Teknik", type: "bs",
+                svg: SVG_ARTS.painting2D,
+                question: "BENAR atau SALAH: Gambar, lukisan, dan kolase termasuk contoh karya seni dua dimensi.",
+                options: ["Benar", "Salah"],
+                correctText: "Benar",
+                explanation: "Pernyataan tersebut BENAR. Gambar, lukisan, dan kolase dibuat pada bidang datar yang memiliki panjang dan lebar."
+            },
+            {
+                id: 27, bab: "Bab 4: Alat & Teknik", type: "bs",
+                svg: SVG_ARTS.scissorsGlue,
+                question: "BENAR atau SALAH: Lem digunakan untuk merekatkan potongan kertas atau daun pada karya kolase.",
+                options: ["Benar", "Salah"],
+                correctText: "Benar",
+                explanation: "Pernyataan tersebut BENAR. Lem berfungsi sebagai perekat agar potongan bahan menempel kuat pada kertas."
+            },
+            {
+                id: 28, bab: "Bab 4: Alat & Teknik", type: "img",
+                svg: SVG_ARTS.paintbrush,
+                question: "Perhatikan gambar alat lukis di atas! Alat berbulu halus yang digunakan untuk menyapukan cat air ke kertas adalah ....",
+                options: ["Kuas", "Pensil warna", "Rautan"],
+                correctText: "Kuas",
+                explanation: "Kuas adalah alat utama untuk melukis menggunakan cat air pada kertas gambar."
+            },
+            {
+                id: 29, bab: "Bab 4: Alat & Teknik", type: "img",
+                svg: SVG_ARTS.clayAnimal,
+                question: "Perhatikan patung gajah kecil berwarna merah muda di atas! Bahan lunak yang digunakan untuk membuatnya adalah ....",
+                options: ["Plastisin", "Kertas koran", "Kain perca"],
+                correctText: "Plastisin",
+                explanation: "Patung hewan berwarna cerah seperti pada gambar dibuat menggunakan plastisin dengan teknik membentuk."
+            },
+            {
+                id: 30, bab: "Bab 4: Alat & Teknik", type: "img",
+                svg: SVG_ARTS.cardboardHouse,
+                question: "Perhatikan kerajinan rumah-rumahan dari kardus pada gambar di atas! Kerajinan tersebut termasuk jenis karya ....",
+                options: ["Karya tiga dimensi", "Karya dua dimensi", "Karya lukisan datar"],
+                correctText: "Karya tiga dimensi",
+                explanation: "Rumah-rumahan kardus memiliki panjang, lebar, dan tinggi (bervolume) sehingga disebut karya tiga dimensi."
+            }
+        ];
+
+        /* ==========================================================================
+           3. STATE PERMAINAN & SISTEM AUDIO (WEB AUDIO API + SPEECH SYNTHESIS)
+           ========================================================================== */
+        let playerData = {
+            nama: "",
+            kelas: "",
+            sekolah: ""
+        };
+
+        let quizState = {
+            questions: [],
+            currentIndex: 0,
+            score: 0,
+            wrong: 0,
+            answered: false,
+            startTime: null,
+            endTime: null
+        };
+
+        let audioSettings = {
+            musicOn: true,
+            sfxOn: true,
+            audioCtx: null,
+            bgmInterval: null,
+            bgmNoteIndex: 0
+        };
+
+        // Inisialisasi Web Audio API saat interaksi pengguna pertama
+        function initAudioContext() {
+            if (!audioSettings.audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                audioSettings.audioCtx = new AudioContext();
+            }
+            if (audioSettings.audioCtx.state === 'suspended') {
+                audioSettings.audioCtx.resume();
+            }
+        }
+
+        // Musik Latar Ceria (Melodi Pentatonik Anak Sederhana)
+        function startBackgroundMusic() {
+            stopBackgroundMusic();
+            if (!audioSettings.musicOn) return;
+            initAudioContext();
+
+            // Tangga nada ceria (C5, D5, E5, G5, A5, G5, E5, D5)
+            const melody = [523.25, 587.33, 659.25, 783.99, 880.00, 783.99, 659.25, 587.33];
+            audioSettings.bgmInterval = setInterval(() => {
+                if (!audioSettings.musicOn || !audioSettings.audioCtx) return;
+                try {
+                    const ctx = audioSettings.audioCtx;
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(melody[audioSettings.bgmNoteIndex % melody.length], ctx.currentTime);
+                    
+                    gain.gain.setValueAtTime(0.035, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.35);
+
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.36);
+                    audioSettings.bgmNoteIndex++;
+                } catch (e) {}
+            }, 480);
+        }
+
+        function stopBackgroundMusic() {
+            if (audioSettings.bgmInterval) {
+                clearInterval(audioSettings.bgmInterval);
+                audioSettings.bgmInterval = null;
+            }
+        }
+
+        function toggleMusic() {
+            initAudioContext();
+            audioSettings.musicOn = !audioSettings.musicOn;
+            const btn = document.getElementById('btn-toggle-music');
+            const label = document.getElementById('music-label');
+            const icon = document.getElementById('music-icon');
+
+            if (audioSettings.musicOn) {
+                btn.classList.remove('off');
+                label.textContent = "Musik: ON";
+                icon.textContent = "🎵";
+                startBackgroundMusic();
+            } else {
+                btn.classList.add('off');
+                label.textContent = "Musik: OFF";
+                icon.textContent = "🔇";
+                stopBackgroundMusic();
+            }
+        }
+
+        function toggleSfx() {
+            initAudioContext();
+            audioSettings.sfxOn = !audioSettings.sfxOn;
+            const btn = document.getElementById('btn-toggle-sfx');
+            const label = document.getElementById('sfx-label');
+            const icon = document.getElementById('sfx-icon');
+
+            if (audioSettings.sfxOn) {
+                btn.classList.remove('off');
+                label.textContent = "Suara: ON";
+                icon.textContent = "🔊";
+                playClickSound();
+            } else {
+                btn.classList.add('off');
+                label.textContent = "Suara: OFF";
+                icon.textContent = "🔈";
+                window.speechSynthesis.cancel();
+            }
+        }
+
+        // Efek Suara Klik
+        function playClickSound() {
+            if (!audioSettings.sfxOn) return;
+            initAudioContext();
+            try {
+                const ctx = audioSettings.audioCtx;
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(600, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(900, ctx.currentTime + 0.08);
+                gain.gain.setValueAtTime(0.15, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.09);
+            } catch (e) {}
+        }
+
+        // Efek Suara Benar (Arpeggio Ceria + Simulasi Tepuk Tangan)
+        function playCorrectSound() {
+            if (!audioSettings.sfxOn) return;
+            initAudioContext();
+            try {
+                const ctx = audioSettings.audioCtx;
+                const notes = [523.25, 659.25, 783.99, 1046.50]; // C5 E5 G5 C6
+                notes.forEach((freq, idx) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.09);
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime + idx * 0.09);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.09 + 0.3);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(ctx.currentTime + idx * 0.09);
+                    osc.stop(ctx.currentTime + idx * 0.09 + 0.32);
+                });
+
+                // Simulasi Tepuk Tangan (White Noise Bursts)
+                for (let i = 0; i < 6; i++) {
+                    const bufferSize = ctx.sampleRate * 0.08;
+                    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                    const data = buffer.getChannelData(0);
+                    for (let j = 0; j < bufferSize; j++) {
+                        data[j] = Math.random() * 2 - 1;
+                    }
+                    const noise = ctx.createBufferSource();
+                    noise.buffer = buffer;
+
+                    const filter = ctx.createBiquadFilter();
+                    filter.type = 'bandpass';
+                    filter.frequency.value = 1200;
+
+                    const gain = ctx.createGain();
+                    gain.gain.setValueAtTime(0.15, ctx.currentTime + 0.1 + i * 0.11);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1 + i * 0.11 + 0.08);
+
+                    noise.connect(filter);
+                    filter.connect(gain);
+                    gain.connect(ctx.destination);
+                    noise.start(ctx.currentTime + 0.1 + i * 0.11);
+                }
+            } catch (e) {}
+        }
+
+        // Efek Suara Salah (Boing Lucu & Lembut)
+        function playWrongSound() {
+            if (!audioSettings.sfxOn) return;
+            initAudioContext();
+            try {
+                const ctx = audioSettings.audioCtx;
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(350, ctx.currentTime);
+                osc.frequency.linearRampToValueAtTime(220, ctx.currentTime + 0.2);
+                osc.frequency.linearRampToValueAtTime(260, ctx.currentTime + 0.35);
+                
+                gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+                
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.42);
+            } catch (e) {}
+        }
+
+        // Efek Suara Kemenangan
+        function playVictorySound() {
+            if (!audioSettings.sfxOn) return;
+            initAudioContext();
+            try {
+                const ctx = audioSettings.audioCtx;
+                const fanfare = [523.25, 523.25, 523.25, 659.25, 783.99, 659.25, 1046.50];
+                const times = [0, 0.14, 0.28, 0.42, 0.6, 0.78, 0.96];
+                fanfare.forEach((freq, idx) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, ctx.currentTime + times[idx]);
+                    gain.gain.setValueAtTime(0.22, ctx.currentTime + times[idx]);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + times[idx] + 0.4);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(ctx.currentTime + times[idx]);
+                    osc.stop(ctx.currentTime + times[idx] + 0.42);
+                });
+            } catch (e) {}
+        }
+
+        // Text-to-Speech Bahasa Indonesia
+        function speakText(text) {
+            if (!audioSettings.sfxOn || !('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'id-ID';
+            utterance.rate = 0.92; // Kecepatan ramah anak kelas 2 SD
+            utterance.pitch = 1.1; // Nada sedikit ceria
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function speakCurrentQuestion() {
+            playClickSound();
+            const q = quizState.questions[quizState.currentIndex];
+            if (!q) return;
+            const letters = ['A', 'B', 'C'];
+            let optionsSpeech = "";
+            if (q.type === 'bs') {
+                optionsSpeech = "Pilihannya: Benar, atau Salah.";
+            } else {
+                optionsSpeech = q.shuffledOptions.map((opt, idx) => `${letters[idx]}. ${opt}`).join(". ");
+            }
+            const cleanQuestion = q.question.replace(/\.\.\.\./g, "titik-titik");
+            speakText(`${cleanQuestion}. ${optionsSpeech}`);
+        }
+
+        /* ==========================================================================
+           4. NAVIGASI LAYAR & LOGIKA PERMAINAN
+           ========================================================================== */
+        function showScreen(screenId) {
+            playClickSound();
+            window.speechSynthesis.cancel();
+            document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goToInstructions() {
+            initAudioContext();
+            if (audioSettings.musicOn && !audioSettings.bgmInterval) {
+                startBackgroundMusic();
+            }
+
+            const nama = document.getElementById('input-nama').value.trim();
+            const kelas = document.getElementById('input-kelas').value.trim();
+            const sekolah = document.getElementById('input-sekolah').value.trim();
+            const errEl = document.getElementById('form-error');
+
+            if (!nama || !kelas || !sekolah) {
+                errEl.style.display = 'block';
+                playWrongSound();
+                return;
+            }
+
+            errEl.style.display = 'none';
+            playerData = { nama, kelas, sekolah };
+            document.getElementById('greet-name').textContent = nama;
+            showScreen('screen-instructions');
+        }
+
+        // Fungsi Pengacak Array (Fisher-Yates Shuffle)
+        function shuffleArray(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function startQuiz() {
+            initAudioContext();
+            if (audioSettings.musicOn && !audioSettings.bgmInterval) {
+                startBackgroundMusic();
+            }
+
+            // Acak urutan 30 soal dan acak urutan pilihan jawaban tanpa mengubah kunci jawaban
+            const randomizedQuestions = shuffleArray(QUESTION_BANK).map(q => {
+                const shuffledOpts = q.type === 'bs' ? ['Benar', 'Salah'] : shuffleArray(q.options);
+                return {
+                    ...q,
+                    shuffledOptions: shuffledOpts
+                };
+            });
+
+            quizState = {
+                questions: randomizedQuestions,
+                currentIndex: 0,
+                score: 0,
+                wrong: 0,
+                answered: false,
+                startTime: Date.now(),
+                endTime: null
+            };
+
+            showScreen('screen-quiz');
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = quizState.questions[quizState.currentIndex];
+            quizState.answered = false;
+
+            // Update Header & Progress
+            document.getElementById('q-counter').textContent = `Soal ${quizState.currentIndex + 1} / ${quizState.questions.length}`;
+            document.getElementById('q-bab').textContent = q.bab;
+            document.getElementById('q-score').textContent = `⭐ Benar: ${quizState.score}`;
+
+            const progressPercent = ((quizState.currentIndex) / quizState.questions.length) * 100;
+            document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+
+            // Render Ilustrasi & Teks Soal
+            document.getElementById('q-illustration').innerHTML = q.svg;
+            document.getElementById('q-text').textContent = q.question;
+
+            // Sembunyikan Panel Pembahasan
+            const feedbackPanel = document.getElementById('feedback-panel');
+            feedbackPanel.style.display = 'none';
+            feedbackPanel.className = 'feedback-panel';
+
+            // Render Pilihan Jawaban
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            const letters = ['A', 'B', 'C'];
+
+            q.shuffledOptions.forEach((optText, index) => {
+                const btn = document.createElement('button');
+                btn.className = `option-btn opt-${index}`;
+                const badgeText = q.type === 'bs' ? (optText === 'Benar' ? '✓' : '✕') : letters[index];
+                
+                btn.innerHTML = `
+                    <span class="option-letter">${badgeText}</span>
+                    <span>${optText}</span>
+                `;
+                btn.onclick = () => selectAnswer(optText, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectAnswer(selectedText, clickedBtn) {
+            if (quizState.answered) return;
+            quizState.answered = true;
+            window.speechSynthesis.cancel();
+
+            const q = quizState.questions[quizState.currentIndex];
+            const isCorrect = (selectedText === q.correctText);
+            const allBtns = document.querySelectorAll('.option-btn');
+
+            allBtns.forEach(btn => {
+                btn.disabled = true;
+                const btnLabel = btn.querySelector('span:last-child').textContent;
+                if (btnLabel === q.correctText) {
+                    btn.classList.add('correct');
+                }
+            });
+
+            const feedbackPanel = document.getElementById('feedback-panel');
+            const feedbackTitle = document.getElementById('feedback-title');
+            const feedbackDesc = document.getElementById('feedback-desc');
+            const btnNext = document.getElementById('btn-next');
+
+            if (isCorrect) {
+                quizState.score++;
+                document.getElementById('q-score').textContent = `⭐ Benar: ${quizState.score}`;
+                playCorrectSound();
+                triggerMiniConfetti();
+
+                feedbackPanel.classList.add('correct-panel');
+                feedbackTitle.innerHTML = "🌟 WAH, HEBAT SEKALI! 🏆";
+                feedbackDesc.innerHTML = `Jawabanmu <strong>${q.correctText}</strong> tepat sekali!<br>${q.explanation}`;
+                speakText(`Wah, hebat sekali! ${q.explanation}`);
+            } else {
+                quizState.wrong++;
+                clickedBtn.classList.add('wrong');
+                playWrongSound();
+
+                feedbackPanel.classList.add('wrong-panel');
+                feedbackTitle.innerHTML = "💡 YUK, COBA BELAJAR LAGI!";
+                feedbackDesc.innerHTML = `Jawaban yang benar adalah: <strong>${q.correctText}</strong>.<br>${q.explanation}`;
+                speakText(`Yuk, coba belajar lagi! Jawaban yang benar adalah ${q.correctText}. ${q.explanation}`);
+            }
+
+            // Ubah teks tombol pada soal terakhir
+            if (quizState.currentIndex === quizState.questions.length - 1) {
+                btnNext.innerHTML = "🏁 LIHAT HASIL & SERTIFIKAT";
+            } else {
+                btnNext.innerHTML = "LANJUT ➡️";
+            }
+
+            feedbackPanel.style.display = 'block';
+            feedbackPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function nextQuestion() {
+            playClickSound();
+            window.speechSynthesis.cancel();
+            quizState.currentIndex++;
+
+            if (quizState.currentIndex < quizState.questions.length) {
+                renderQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function finishQuiz() {
+            quizState.endTime = Date.now();
+            document.getElementById('progress-bar').style.width = '100%';
+            showScreen('screen-result');
+            playVictorySound();
+            startFullConfetti();
+
+            const total = quizState.questions.length;
+            const benar = quizState.score;
+            const salah = quizState.wrong;
+            const nilaiAkhir = Math.round((benar / total) * 100);
+            const persen = Math.round((benar / total) * 100);
+
+            // Hitung Durasi
+            const diffSeconds = Math.max(1, Math.floor((quizState.endTime - quizState.startTime) / 1000));
+            const mins = String(Math.floor(diffSeconds / 60)).padStart(2, '0');
+            const secs = String(diffSeconds % 60).padStart(2, '0');
+            const durasiText = `${mins}:${secs}`;
+
+            // Tentukan Predikat
+            let predikat = "";
+            if (nilaiAkhir >= 90) predikat = "BINTANG SENI!";
+            else if (nilaiAkhir >= 80) predikat = "KREATIF SEKALI!";
+            else if (nilaiAkhir >= 70) predikat = "HEBAT!";
+            else if (nilaiAkhir >= 60) predikat = "TERUS BERLATIH!";
+            else predikat = "AYO BELAJAR LAGI!";
+
+            // Tampilkan di Halaman Hasil
+            document.getElementById('res-nama').textContent = playerData.nama;
+            document.getElementById('res-kelas').textContent = playerData.kelas;
+            document.getElementById('res-sekolah').textContent = playerData.sekolah;
+            document.getElementById('res-benar').textContent = `${benar} / ${total}`;
+            document.getElementById('res-salah').textContent = salah;
+            document.getElementById('res-nilai').textContent = nilaiAkhir;
+            document.getElementById('res-persen').textContent = `${persen}%`;
+            document.getElementById('res-durasi').textContent = durasiText;
+            document.getElementById('res-predikat').textContent = predikat;
+
+            // Tampilkan di Sertifikat
+            const today = new Date();
+            const optionsDate = { day: 'numeric', month: 'long', year: 'numeric' };
+            const formattedDate = today.toLocaleDateString('id-ID', optionsDate);
+
+            document.getElementById('cert-nama').textContent = playerData.nama;
+            document.getElementById('cert-kelas').textContent = playerData.kelas;
+            document.getElementById('cert-sekolah').textContent = playerData.sekolah;
+            document.getElementById('cert-nilai').textContent = nilaiAkhir;
+            document.getElementById('cert-predikat').textContent = predikat;
+            document.getElementById('cert-tanggal').textContent = formattedDate;
+
+            speakText(`Selamat ${playerData.nama}! Kamu mendapatkan nilai ${nilaiAkhir} dengan predikat ${predikat}`);
+        }
+
+        /* ==========================================================================
+           5. CETAK & DOWNLOAD SERTIFIKAT (CANVAS HIGH-RES PNG + PRINT PDF)
+           ========================================================================== */
+        function printCertificate() {
+            playClickSound();
+            window.print();
+        }
+
+        function downloadCertificateImage() {
+            playClickSound();
+            // Membuat gambar sertifikat resolusi tinggi langsung melalui HTML5 Canvas agar 100% bisa diunduh offline
+            const canvas = document.createElement('canvas');
+            canvas.width = 1200;
+            canvas.height = 850;
+            const ctx = canvas.getContext('2d');
+
+            // Latar Belakang Gradien Cerah
+            const grad = ctx.createLinearGradient(0, 0, 1200, 850);
+            grad.addColorStop(0, '#FFFDF5');
+            grad.addColorStop(0.5, '#FFF0F5');
+            grad.addColorStop(1, '#E0F2FE');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 1200, 850);
+
+            // Bingkai Luar Kuning
+            ctx.strokeStyle = '#FFD166';
+            ctx.lineWidth = 28;
+            ctx.strokeRect(14, 14, 1172, 822);
+
+            // Bingkai Putus-putus Merah Muda
+            ctx.save();
+            ctx.strokeStyle = '#EF476F';
+            ctx.lineWidth = 6;
+            ctx.setLineDash([18, 12]);
+            ctx.strokeRect(42, 42, 1116, 766);
+            ctx.restore();
+
+            // Judul Sertifikat
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#EF476F';
+            ctx.font = 'bold 54px sans-serif';
+            ctx.fillText('SERTIFIKAT PENGHARGAAN', 600, 135);
+
+            // Subjudul Bintang Seni Cilik
+            ctx.fillStyle = '#8338EC';
+            ctx.font = 'bold 34px sans-serif';
+            ctx.fillText('⭐ BINTANG SENI CILIK ⭐', 600, 190);
+
+            // Diberikan kepada
+            ctx.fillStyle = '#475569';
+            ctx.font = 'bold 26px sans-serif';
+            ctx.fillText('Diberikan kepada:', 600, 255);
+
+            // Nama Murid
+            ctx.fillStyle = '#118AB2';
+            ctx.font = 'bold 56px sans-serif';
+            ctx.fillText(playerData.nama.toUpperCase(), 600, 325);
+
+            // Garis Bawah Nama
+            ctx.strokeStyle = '#118AB2';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(300, 342);
+            ctx.lineTo(900, 342);
+            ctx.stroke();
+
+            // Identitas Kelas & Sekolah
+            ctx.fillStyle = '#334155';
+            ctx.font = 'bold 24px sans-serif';
+            ctx.fillText(`Kelas: ${playerData.kelas}   |   Sekolah: ${playerData.sekolah}`, 600, 390);
+            ctx.font = '23px sans-serif';
+            ctx.fillText('Atas keberhasilannya menyelesaikan Latihan Ulangan Harian Seni Rupa Kelas 2 SD dengan materi:', 600, 440);
+
+            // Kotak Materi
+            ctx.fillStyle = '#FEF3C7';
+            ctx.fillRect(120, 468, 960, 75);
+            ctx.strokeStyle = '#F59E0B';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(120, 468, 960, 75);
+
+            ctx.fillStyle = '#92400E';
+            ctx.font = 'bold 21px sans-serif';
+            ctx.fillText('"MENGGALI IDE UNTUK BERKARYA DAN EKSPLORASI TEKNIK, ALAT, DAN BAHAN UNTUK BERKARYA"', 600, 513);
+
+            // Kotak Nilai & Predikat
+            const nilai = document.getElementById('cert-nilai').textContent;
+            const predikat = document.getElementById('cert-predikat').textContent;
+            const tanggal = document.getElementById('cert-tanggal').textContent;
+
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(240, 575, 320, 65);
+            ctx.strokeStyle = '#06D6A0';
+            ctx.lineWidth = 4;
+            ctx.strokeRect(240, 575, 320, 65);
+            ctx.fillStyle = '#065F46';
+            ctx.font = 'bold 28px sans-serif';
+            ctx.fillText(`Nilai Akhir: ${nilai}`, 400, 617);
+
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(600, 575, 380, 65);
+            ctx.strokeStyle = '#FF9F1C';
+            ctx.lineWidth = 4;
+            ctx.strokeRect(600, 575, 380, 65);
+            ctx.fillStyle = '#92400E';
+            ctx.font = 'bold 26px sans-serif';
+            ctx.fillText(`Predikat: ${predikat}`, 790, 617);
+
+            // Footer Tanggal & Tanda Tangan
+            ctx.textAlign = 'left';
+            ctx.fillStyle = '#64748B';
+            ctx.font = 'bold 22px sans-serif';
+            ctx.fillText(`Tanggal: ${tanggal}`, 110, 745);
+
+            ctx.textAlign = 'center';
+            ctx.fillText('🏅 Petualangan Dunia Kreatif', 950, 745);
+
+            // Trigger Download
+            const link = document.createElement('a');
+            link.download = `Sertifikat_Seni_Rupa_${playerData.nama.replace(/\s+/g, '_')}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        /* ==========================================================================
+           6. ANIMASI KONFETI PERAYAAN
+           ========================================================================== */
+        const confettiCanvas = document.getElementById('confetti-canvas');
+        const cCtx = confettiCanvas.getContext('2d');
+        let confettiPieces = [];
+        let confettiAnimId = null;
+
+        function resizeConfetti() {
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeConfetti);
+        resizeConfetti();
+
+        function createConfetti(count) {
+            const colors = ['#FFD166', '#EF476F', '#06D6A0', '#118AB2', '#8338EC', '#FF9F1C'];
+            for (let i = 0; i < count; i++) {
+                confettiPieces.push({
+                    x: Math.random() * confettiCanvas.width,
+                    y: Math.random() * -confettiCanvas.height,
+                    w: Math.random() * 12 + 6,
+                    h: Math.random() * 8 + 4,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    vy: Math.random() * 4 + 2,
+                    vx: Math.random() * 2 - 1,
+                    rot: Math.random() * 360,
+                    vRot: Math.random() * 8 - 4
+                });
+            }
+        }
+
+        function updateConfetti() {
+            cCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            confettiPieces.forEach((p, idx) => {
+                p.y += p.vy;
+                p.x += p.vx;
+                p.rot += p.vRot;
+
+                cCtx.save();
+                cCtx.translate(p.x, p.y);
+                cCtx.rotate((p.rot * Math.PI) / 180);
+                cCtx.fillStyle = p.color;
+                cCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+                cCtx.restore();
+
+                if (p.y > confettiCanvas.height) {
+                    confettiPieces.splice(idx, 1);
+                }
+            });
+
+            if (confettiPieces.length > 0) {
+                confettiAnimId = requestAnimationFrame(updateConfetti);
+            } else {
+                cancelAnimationFrame(confettiAnimId);
+                confettiAnimId = null;
+            }
+        }
+
+        function triggerMiniConfetti() {
+            createConfetti(35);
+            if (!confettiAnimId) updateConfetti();
+        }
+
+        function startFullConfetti() {
+            createConfetti(140);
+            if (!confettiAnimId) updateConfetti();
+        }
+    </script>
+</body>
+</html>
